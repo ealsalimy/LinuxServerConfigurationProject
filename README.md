@@ -1,5 +1,5 @@
 # Linux Server Configuration Project
-IP address 3.121.58.54 port 2200
+IP address `3.121.58.54` port `2200`,
 Complete URL for Web Application `3.121.58.54/catalog`
 
 # Applications and Configuration
@@ -17,17 +17,16 @@ Complete URL for Web Application `3.121.58.54/catalog`
 * I changed SSH port 22 to 2200 by editing the configuration file for sshd `etc/ssh/sshd_config`
 after making sure the AWS instance firewall allows incoming connection to port 2200
 * I created a `wsgi` file in the same directory as `ItemCatalogApp` to serve the flask app with the following content
-and I named it myapp.wsgi
+and I named it myapp.wsgi.    
+
 `import sys
 import logging
-
 logging.basicConfig(stream=sys.stderr)
 sys.path.insert(0,'/var/www/ItemCatalogApp')
+from application import app as application`
 
-from application import app as application
-`
 * I created a Configuration file for apache in this directory /etc/apache2/sites-available
-and I named it myapp.conf
+and I named it myapp.conf   
 `<VirtualHost *:80>
      ServerName  3.121.58.54
      #ServerAdmin email address
@@ -44,14 +43,15 @@ and I named it myapp.conf
      </Directory>
      ErrorLog ${APACHE_LOG_DIR}/error.log
      CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>`
 
-</VirtualHost>
-`
 * Disable the default apache site, and enable my flask app
-`sudo a2dissite 000-default.conf`
+ `sudo a2dissite 000-default.conf`
 `sudo a2ensite myapp.conf`
 then restart the service `sudo service apache2 reload`
+
 * After Creating a new database user named `catalog` I made minor changes to `application.py` and `models.py`.
+
 `engine = create_engine('postgresql://catalog:catalog@localhost/catalog')`
 
 ## Grader
