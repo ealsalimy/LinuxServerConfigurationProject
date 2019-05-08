@@ -4,6 +4,8 @@ Complete URL for Web Application `3.121.58.54/catalog`
 
 # Applications and Configuration
 ## Applications Installed
+* `sudo apt-get update`, `sudo apt-get upgrade`
+* Automatic Updates: `sudo apt-get install unattended-upgrades`, `sudo dpkg-reconfigure unattended-upgrades`
 * `sudo apt-get install libapache2-mod-wsgi-py3`
 * `sudo apt-get install apache2`
 * `sudo apt-get install python-pip`
